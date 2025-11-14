@@ -1,0 +1,15 @@
+{
+    "name": "smart-assistant/smart-assistant",
+    "description": "AI-powered assistant for WordPress",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "AIAssistant\\": "inc/"
+        }
+    }
+}
+
