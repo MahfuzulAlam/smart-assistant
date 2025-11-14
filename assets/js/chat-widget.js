@@ -20,22 +20,22 @@
 			const self = this;
 
 			// Toggle chat window
-			$('#ai-assistant-button').on('click', function() {
+			$('#smart-assistant-button').on('click', function() {
 				self.toggleChat();
 			});
 
 			// Close chat
-			$('#ai-assistant-close').on('click', function() {
+			$('#smart-assistant-close').on('click', function() {
 				self.closeChat();
 			});
 
 			// Send message on button click
-			$('#ai-assistant-send').on('click', function() {
+			$('#smart-assistant-send').on('click', function() {
 				self.sendMessage();
 			});
 
 			// Send message on Enter key
-			$('#ai-assistant-input').on('keypress', function(e) {
+			$('#smart-assistant-input').on('keypress', function(e) {
 				if (e.which === 13 && !e.shiftKey) {
 					e.preventDefault();
 					self.sendMessage();
@@ -44,7 +44,7 @@
 
 			// Close on outside click (optional)
 			$(document).on('click', function(e) {
-				if (self.isOpen && !$(e.target).closest('.ai-assistant-widget').length) {
+				if (self.isOpen && !$(e.target).closest('.smart-assistant-widget').length) {
 					// Uncomment to close on outside click
 					// self.closeChat();
 				}
@@ -61,24 +61,24 @@
 
 		openChat: function() {
 			this.isOpen = true;
-			$('#ai-assistant-chat').slideDown(300);
-			$('#ai-assistant-input').focus();
+			$('#smart-assistant-chat').slideDown(300);
+			$('#smart-assistant-input').focus();
 			this.scrollToBottom();
 		},
 
 		closeChat: function() {
 			this.isOpen = false;
-			$('#ai-assistant-chat').slideUp(300);
+			$('#smart-assistant-chat').slideUp(300);
 		},
 
 		showWelcomeMessage: function() {
-			if (typeof aiAssistant !== 'undefined' && aiAssistant.welcomeMessage) {
-				this.addMessage('ai', aiAssistant.welcomeMessage);
+			if (typeof smartAssistant !== 'undefined' && smartAssistant.welcomeMessage) {
+				this.addMessage('ai', smartAssistant.welcomeMessage);
 			}
 		},
 
 		sendMessage: function() {
-			const input = $('#ai-assistant-input');
+			const input = $('#smart-assistant-input');
 			const message = input.val().trim();
 
 			if (!message) {
@@ -87,7 +87,7 @@
 
 			// Disable input and send button
 			input.prop('disabled', true);
-			$('#ai-assistant-send').prop('disabled', true);
+			$('#smart-assistant-send').prop('disabled', true);
 
 			// Add user message to chat
 			this.addMessage('user', message);
@@ -105,11 +105,11 @@
 
 			// Send AJAX request
 			$.ajax({
-				url: aiAssistant.ajaxUrl,
+				url: smartAssistant.ajaxUrl,
 				type: 'POST',
 				data: {
-					action: 'ai_assistant_chat',
-					nonce: aiAssistant.nonce,
+					action: 'smart_assistant_chat',
+					nonce: smartAssistant.nonce,
 					message: message,
 					history: JSON.stringify(this.history)
 				},
@@ -126,32 +126,32 @@
 					} else {
 						const errorMsg = response.data && response.data.message 
 							? response.data.message 
-							: aiAssistant.strings.error;
+							: smartAssistant.strings.error;
 						this.addMessage('ai', errorMsg, true);
 					}
 				},
 				error: () => {
 					this.hideLoading();
-					this.addMessage('ai', aiAssistant.strings.error, true);
+					this.addMessage('ai', smartAssistant.strings.error, true);
 				},
 				complete: () => {
 					// Re-enable input and send button
 					input.prop('disabled', false);
-					$('#ai-assistant-send').prop('disabled', false);
+					$('#smart-assistant-send').prop('disabled', false);
 					input.focus();
 				}
 			});
 		},
 
 		addMessage: function(role, content, isError = false) {
-			const messagesContainer = $('#ai-assistant-messages');
+			const messagesContainer = $('#smart-assistant-messages');
 			const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 			
 			const messageClass = isError ? 'ai error' : role;
 			const messageHtml = `
-				<div class="ai-assistant-message ${messageClass}">
-					<div class="ai-assistant-message-content">${this.escapeHtml(content)}</div>
-					<div class="ai-assistant-message-time">${timestamp}</div>
+				<div class="smart-assistant-message ${messageClass}">
+					<div class="smart-assistant-message-content">${this.escapeHtml(content)}</div>
+					<div class="smart-assistant-message-time">${timestamp}</div>
 				</div>
 			`;
 
@@ -160,15 +160,15 @@
 		},
 
 		showLoading: function() {
-			const messagesContainer = $('#ai-assistant-messages');
+			const messagesContainer = $('#smart-assistant-messages');
 			const loadingHtml = `
-				<div class="ai-assistant-loading" id="ai-assistant-loading">
-					<div class="ai-assistant-loading-dots">
-						<div class="ai-assistant-loading-dot"></div>
-						<div class="ai-assistant-loading-dot"></div>
-						<div class="ai-assistant-loading-dot"></div>
+				<div class="smart-assistant-loading" id="smart-assistant-loading">
+					<div class="smart-assistant-loading-dots">
+						<div class="smart-assistant-loading-dot"></div>
+						<div class="smart-assistant-loading-dot"></div>
+						<div class="smart-assistant-loading-dot"></div>
 					</div>
-					<span>${aiAssistant.strings.sending}</span>
+					<span>${smartAssistant.strings.sending}</span>
 				</div>
 			`;
 			messagesContainer.append(loadingHtml);
@@ -176,11 +176,11 @@
 		},
 
 		hideLoading: function() {
-			$('#ai-assistant-loading').remove();
+			$('#smart-assistant-loading').remove();
 		},
 
 		scrollToBottom: function() {
-			const messagesContainer = $('#ai-assistant-messages');
+			const messagesContainer = $('#smart-assistant-messages');
 			messagesContainer.scrollTop(messagesContainer[0].scrollHeight);
 		},
 
@@ -198,7 +198,7 @@
 		saveHistory: function() {
 			// Store in sessionStorage (limited to session)
 			try {
-				sessionStorage.setItem('ai_assistant_history', JSON.stringify(this.history));
+				sessionStorage.setItem('smart_assistant_history', JSON.stringify(this.history));
 			} catch (e) {
 				// Fallback if sessionStorage is not available
 				console.warn('Could not save chat history');
@@ -208,7 +208,7 @@
 		loadHistory: function() {
 			// Load from sessionStorage
 			try {
-				const saved = sessionStorage.getItem('ai_assistant_history');
+				const saved = sessionStorage.getItem('smart_assistant_history');
 				if (saved) {
 					this.history = JSON.parse(saved);
 					// Optionally restore messages to UI
@@ -222,20 +222,20 @@
 		clearHistory: function() {
 			this.history = [];
 			this.saveHistory();
-			$('#ai-assistant-messages').empty();
+			$('#smart-assistant-messages').empty();
 			this.showWelcomeMessage();
 		}
 	};
 
 	// Initialize when DOM is ready
 	$(document).ready(function() {
-		if (typeof aiAssistant !== 'undefined') {
+		if (typeof smartAssistant !== 'undefined') {
 			ChatWidget.init();
 		}
 	});
 
 	// Add clear chat functionality
-	$(document).on('click', '.ai-assistant-clear', function(e) {
+	$(document).on('click', '.smart-assistant-clear', function(e) {
 		e.preventDefault();
 		if (confirm('Clear chat history?')) {
 			ChatWidget.clearHistory();

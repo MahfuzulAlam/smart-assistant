@@ -6,7 +6,7 @@
  * Version: 0.0.1
  * Author: Your Name
  * Author URI: https://example.com
- * Text Domain: ai-assistant
+ * Text Domain: smart-assistant
  * Domain Path: /languages
  * Requires at least: 5.8
  * Requires PHP: 7.4
@@ -20,19 +20,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Define plugin constants
-define( 'AI_ASSISTANT_VERSION', '0.0.1' );
-define( 'AI_ASSISTANT_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-define( 'AI_ASSISTANT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-define( 'AI_ASSISTANT_PLUGIN_FILE', __FILE__ );
+define( 'SMART_ASSISTANT_VERSION', '0.0.1' );
+define( 'SMART_ASSISTANT_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'SMART_ASSISTANT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'SMART_ASSISTANT_PLUGIN_FILE', __FILE__ );
 
 // Load Composer autoloader
-if ( file_exists( AI_ASSISTANT_PLUGIN_DIR . 'vendor/autoload.php' ) ) {
-	require_once AI_ASSISTANT_PLUGIN_DIR . 'vendor/autoload.php';
+if ( file_exists( SMART_ASSISTANT_PLUGIN_DIR . 'vendor/autoload.php' ) ) {
+	require_once SMART_ASSISTANT_PLUGIN_DIR . 'vendor/autoload.php';
 } else {
 	// Fallback autoloader if Composer hasn't been run
 	spl_autoload_register( function ( $class ) {
 		$prefix = 'AIAssistant\\';
-		$base_dir = AI_ASSISTANT_PLUGIN_DIR . 'src/';
+		$base_dir = SMART_ASSISTANT_PLUGIN_DIR . 'inc/';
 		
 		$len = strlen( $prefix );
 		if ( strncmp( $prefix, $class, $len ) !== 0 ) {
@@ -49,13 +49,13 @@ if ( file_exists( AI_ASSISTANT_PLUGIN_DIR . 'vendor/autoload.php' ) ) {
 }
 
 // Initialize the plugin
-function ai_assistant_init() {
+function smart_assistant_init() {
 	$plugin = new AIAssistant\Plugin();
 	$plugin->init();
 }
 
 // Hook into WordPress
-add_action( 'plugins_loaded', 'ai_assistant_init' );
+add_action( 'plugins_loaded', 'smart_assistant_init' );
 
 // Activation hook
 register_activation_hook( __FILE__, function () {

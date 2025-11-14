@@ -1,5 +1,5 @@
 /**
- * Admin JavaScript for AI Assistant Settings
+ * Admin JavaScript for Smart Assistant Settings
  */
 (function($) {
 	'use strict';

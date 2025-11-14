@@ -36,8 +36,8 @@ class ChatHandler {
 		$this->openai_client     = new OpenAIClient();
 		$this->content_retriever = new ContentRetriever();
 
-		add_action( 'wp_ajax_ai_assistant_chat', array( $this, 'handle_chat_request' ) );
-		add_action( 'wp_ajax_nopriv_ai_assistant_chat', array( $this, 'handle_chat_request' ) );
+		add_action( 'wp_ajax_smart_assistant_chat', array( $this, 'handle_chat_request' ) );
+		add_action( 'wp_ajax_nopriv_smart_assistant_chat', array( $this, 'handle_chat_request' ) );
 	}
 
 	/**
@@ -45,19 +45,19 @@ class ChatHandler {
 	 */
 	public function handle_chat_request() {
 		// Verify nonce
-		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'ai_assistant_chat_nonce' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Security check failed.', 'ai-assistant' ) ) );
+		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'smart_assistant_chat_nonce' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Security check failed.', 'smart-assistant' ) ) );
 		}
 
 		// Check rate limiting
 		if ( ! $this->check_rate_limit() ) {
-			wp_send_json_error( array( 'message' => __( 'Please wait a moment before sending another message.', 'ai-assistant' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Please wait a moment before sending another message.', 'smart-assistant' ) ) );
 		}
 
 		// Get user message
 		$user_message = isset( $_POST['message'] ) ? sanitize_text_field( wp_unslash( $_POST['message'] ) ) : '';
 		if ( empty( $user_message ) ) {
-			wp_send_json_error( array( 'message' => __( 'Please enter a message.', 'ai-assistant' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Please enter a message.', 'smart-assistant' ) ) );
 		}
 
 		// Get chat history
@@ -79,8 +79,9 @@ class ChatHandler {
 		$response = $this->openai_client->send_chat_message( $messages );
 
 		if ( is_wp_error( $response ) ) {
-			error_log( 'AI Assistant Error: ' . $response->get_error_message() );
-			wp_send_json_error( array( 'message' => __( 'Sorry, I\'m having trouble connecting. Please try again later.', 'ai-assistant' ) ) );
+			error_log( 'Smart Assistant Error: ' . $response->get_error_message() );
+			//wp_send_json_error( array( 'message' => __( 'Sorry, I\'m having trouble connecting. Please try again later.', 'smart-assistant' ) ) );
+			wp_send_json_error( array( 'message' => $response->get_error_message() ) );
 		}
 
 		// Return success response
@@ -177,7 +178,7 @@ class ChatHandler {
 	 */
 	private function check_rate_limit() {
 		$session_id = $this->get_session_id();
-		$transient_key = 'ai_assistant_rate_limit_' . $session_id;
+		$transient_key = 'smart_assistant_rate_limit_' . $session_id;
 		$requests = get_transient( $transient_key );
 
 		if ( false === $requests ) {

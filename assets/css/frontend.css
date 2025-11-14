@@ -1,9 +1,9 @@
 /**
- * Frontend Styles for AI Assistant Chat Widget
+ * Frontend Styles for Smart Assistant Chat Widget
  */
 
 /* Chat Widget Container */
-.ai-assistant-widget {
+.smart-assistant-widget {
 	position: fixed;
 	bottom: 20px;
 	right: 20px;
@@ -12,7 +12,7 @@
 }
 
 /* Chat Button */
-.ai-assistant-button {
+.smart-assistant-button {
 	width: 60px;
 	height: 60px;
 	border-radius: 50%;
@@ -29,22 +29,22 @@
 	position: relative;
 }
 
-.ai-assistant-button:hover {
+.smart-assistant-button:hover {
 	transform: scale(1.1);
 	box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
-.ai-assistant-button:active {
+.smart-assistant-button:active {
 	transform: scale(0.95);
 }
 
-.ai-assistant-button svg {
+.smart-assistant-button svg {
 	width: 24px;
 	height: 24px;
 }
 
 /* Chat Window */
-.ai-assistant-chat {
+.smart-assistant-chat {
 	position: absolute;
 	bottom: 80px;
 	right: 0;
@@ -71,7 +71,7 @@
 }
 
 /* Chat Header */
-.ai-assistant-chat-header {
+.smart-assistant-chat-header {
 	background: #0073aa;
 	color: white;
 	padding: 16px 20px;
@@ -80,13 +80,13 @@
 	align-items: center;
 }
 
-.ai-assistant-chat-header h3 {
+.smart-assistant-chat-header h3 {
 	margin: 0;
 	font-size: 18px;
 	font-weight: 600;
 }
 
-.ai-assistant-close {
+.smart-assistant-close {
 	background: none;
 	border: none;
 	color: white;
@@ -101,18 +101,18 @@
 	border-radius: 4px;
 }
 
-.ai-assistant-close:hover {
+.smart-assistant-close:hover {
 	background: rgba(255, 255, 255, 0.1);
 	opacity: 0.8;
 }
 
-.ai-assistant-close svg {
+.smart-assistant-close svg {
 	width: 20px;
 	height: 20px;
 }
 
 /* Messages Container */
-.ai-assistant-messages {
+.smart-assistant-messages {
 	flex: 1;
 	overflow-y: auto;
 	padding: 20px;
@@ -122,25 +122,25 @@
 	background: #f5f5f5;
 }
 
-.ai-assistant-messages::-webkit-scrollbar {
+.smart-assistant-messages::-webkit-scrollbar {
 	width: 6px;
 }
 
-.ai-assistant-messages::-webkit-scrollbar-track {
+.smart-assistant-messages::-webkit-scrollbar-track {
 	background: #f1f1f1;
 }
 
-.ai-assistant-messages::-webkit-scrollbar-thumb {
+.smart-assistant-messages::-webkit-scrollbar-thumb {
 	background: #888;
 	border-radius: 3px;
 }
 
-.ai-assistant-messages::-webkit-scrollbar-thumb:hover {
+.smart-assistant-messages::-webkit-scrollbar-thumb:hover {
 	background: #555;
 }
 
 /* Message Bubbles */
-.ai-assistant-message {
+.smart-assistant-message {
 	max-width: 75%;
 	padding: 12px 16px;
 	border-radius: 18px;
@@ -160,28 +160,28 @@
 	}
 }
 
-.ai-assistant-message.user {
+.smart-assistant-message.user {
 	align-self: flex-end;
 	background: #0073aa;
 	color: white;
 	border-bottom-right-radius: 4px;
 }
 
-.ai-assistant-message.ai {
+.smart-assistant-message.ai {
 	align-self: flex-start;
 	background: #e0e0e0;
 	color: #333;
 	border-bottom-left-radius: 4px;
 }
 
-.ai-assistant-message-time {
+.smart-assistant-message-time {
 	font-size: 11px;
 	opacity: 0.7;
 	margin-top: 4px;
 }
 
 /* Loading Indicator */
-.ai-assistant-loading {
+.smart-assistant-loading {
 	display: flex;
 	align-items: center;
 	gap: 8px;
@@ -192,12 +192,12 @@
 	max-width: 75%;
 }
 
-.ai-assistant-loading-dots {
+.smart-assistant-loading-dots {
 	display: flex;
 	gap: 4px;
 }
 
-.ai-assistant-loading-dot {
+.smart-assistant-loading-dot {
 	width: 8px;
 	height: 8px;
 	border-radius: 50%;
@@ -205,11 +205,11 @@
 	animation: bounce 1.4s infinite ease-in-out both;
 }
 
-.ai-assistant-loading-dot:nth-child(1) {
+.smart-assistant-loading-dot:nth-child(1) {
 	animation-delay: -0.32s;
 }
 
-.ai-assistant-loading-dot:nth-child(2) {
+.smart-assistant-loading-dot:nth-child(2) {
 	animation-delay: -0.16s;
 }
 
@@ -223,7 +223,7 @@
 }
 
 /* Input Container */
-.ai-assistant-input-container {
+.smart-assistant-input-container {
 	display: flex;
 	padding: 16px;
 	background: white;
@@ -231,7 +231,7 @@
 	gap: 8px;
 }
 
-.ai-assistant-input {
+.smart-assistant-input {
 	flex: 1;
 	padding: 12px 16px;
 	border: 1px solid #e0e0e0;
@@ -241,11 +241,11 @@
 	transition: border-color 0.2s ease;
 }
 
-.ai-assistant-input:focus {
+.smart-assistant-input:focus {
 	border-color: #0073aa;
 }
 
-.ai-assistant-send {
+.smart-assistant-send {
 	width: 44px;
 	height: 44px;
 	border-radius: 50%;
@@ -260,34 +260,34 @@
 	padding: 0;
 }
 
-.ai-assistant-send:hover {
+.smart-assistant-send:hover {
 	background: #005a87;
 	transform: scale(1.05);
 }
 
-.ai-assistant-send:active {
+.smart-assistant-send:active {
 	transform: scale(0.95);
 }
 
-.ai-assistant-send:disabled {
+.smart-assistant-send:disabled {
 	opacity: 0.5;
 	cursor: not-allowed;
 }
 
-.ai-assistant-send svg {
+.smart-assistant-send svg {
 	width: 20px;
 	height: 20px;
 }
 
 /* Footer */
-.ai-assistant-footer {
+.smart-assistant-footer {
 	padding: 8px 16px;
 	background: #f9f9f9;
 	border-top: 1px solid #e0e0e0;
 	text-align: center;
 }
 
-.ai-assistant-footer p {
+.smart-assistant-footer p {
 	margin: 0;
 	font-size: 11px;
 	color: #666;
@@ -295,12 +295,12 @@
 
 /* Responsive Design */
 @media (max-width: 480px) {
-	.ai-assistant-widget {
+	.smart-assistant-widget {
 		bottom: 10px;
 		right: 10px;
 	}
 
-	.ai-assistant-chat {
+	.smart-assistant-chat {
 		width: calc(100vw - 20px);
 		height: calc(100vh - 100px);
 		max-width: 400px;
@@ -309,18 +309,18 @@
 		right: 0;
 	}
 
-	.ai-assistant-button {
+	.smart-assistant-button {
 		width: 56px;
 		height: 56px;
 	}
 
-	.ai-assistant-message {
+	.smart-assistant-message {
 		max-width: 85%;
 	}
 }
 
 /* Clear Chat Button */
-.ai-assistant-clear {
+.smart-assistant-clear {
 	position: absolute;
 	top: 16px;
 	right: 50px;
@@ -334,7 +334,7 @@
 	transition: background 0.2s ease;
 }
 
-.ai-assistant-clear:hover {
+.smart-assistant-clear:hover {
 	background: rgba(255, 255, 255, 0.2);
 }
 

@@ -17,14 +17,14 @@ class Settings {
 	 *
 	 * @var string
 	 */
-	private $option_group = 'ai_assistant_settings';
+	private $option_group = 'smart_assistant_settings';
 
 	/**
 	 * Option name
 	 *
 	 * @var string
 	 */
-	private $option_name = 'ai_assistant_settings';
+	private $option_name = 'smart_assistant_settings';
 
 	/**
 	 * Initialize settings page
@@ -40,10 +40,10 @@ class Settings {
 	 */
 	public function add_settings_page() {
 		add_options_page(
-			__( 'AI Assistant Settings', 'ai-assistant' ),
-			__( 'AI Assistant', 'ai-assistant' ),
+			__( 'Smart Assistant Settings', 'smart-assistant' ),
+			__( 'Smart Assistant', 'smart-assistant' ),
 			'manage_options',
-			'ai-assistant-settings',
+			'smart-assistant-settings',
 			array( $this, 'render_settings_page' )
 		);
 	}
@@ -62,80 +62,80 @@ class Settings {
 
 		// General Settings Section
 		add_settings_section(
-			'ai_assistant_general',
-			__( 'General Settings', 'ai-assistant' ),
+			'smart_assistant_general',
+			__( 'General Settings', 'smart-assistant' ),
 			array( $this, 'render_general_section' ),
-			'ai-assistant-settings'
+			'smart-assistant-settings'
 		);
 
 		// API Settings Section
 		add_settings_section(
-			'ai_assistant_api',
-			__( 'API Settings', 'ai-assistant' ),
+			'smart_assistant_api',
+			__( 'API Settings', 'smart-assistant' ),
 			array( $this, 'render_api_section' ),
-			'ai-assistant-settings'
+			'smart-assistant-settings'
 		);
 
 		// Appearance Settings Section
 		add_settings_section(
-			'ai_assistant_appearance',
-			__( 'Appearance Settings', 'ai-assistant' ),
+			'smart_assistant_appearance',
+			__( 'Appearance Settings', 'smart-assistant' ),
 			array( $this, 'render_appearance_section' ),
-			'ai-assistant-settings'
+			'smart-assistant-settings'
 		);
 
 		// Enable/Disable
 		add_settings_field(
 			'enabled',
-			__( 'Enable AI Assistant', 'ai-assistant' ),
+			__( 'Enable Smart Assistant', 'smart-assistant' ),
 			array( $this, 'render_enabled_field' ),
-			'ai-assistant-settings',
-			'ai_assistant_general'
+			'smart-assistant-settings',
+			'smart_assistant_general'
 		);
 
 		// Welcome Message
 		add_settings_field(
 			'welcome_message',
-			__( 'Welcome Message', 'ai-assistant' ),
+			__( 'Welcome Message', 'smart-assistant' ),
 			array( $this, 'render_welcome_message_field' ),
-			'ai-assistant-settings',
-			'ai_assistant_general'
+			'smart-assistant-settings',
+			'smart_assistant_general'
 		);
 
 		// API Key
 		add_settings_field(
 			'api_key',
-			__( 'OpenAI API Key', 'ai-assistant' ),
+			__( 'OpenAI API Key', 'smart-assistant' ),
 			array( $this, 'render_api_key_field' ),
-			'ai-assistant-settings',
-			'ai_assistant_api'
+			'smart-assistant-settings',
+			'smart_assistant_api'
 		);
 
 		// Model Selection
 		add_settings_field(
 			'model',
-			__( 'Model', 'ai-assistant' ),
+			__( 'Model', 'smart-assistant' ),
 			array( $this, 'render_model_field' ),
-			'ai-assistant-settings',
-			'ai_assistant_api'
+			'smart-assistant-settings',
+			'smart_assistant_api'
 		);
 
 		// Max Context Posts
 		add_settings_field(
 			'max_context_posts',
-			__( 'Max Context Posts', 'ai-assistant' ),
+			__( 'Max Context Posts', 'smart-assistant' ),
 			array( $this, 'render_max_context_posts_field' ),
-			'ai-assistant-settings',
-			'ai_assistant_api'
+			'smart-assistant-settings',
+			'smart_assistant_api'
 		);
 
 		// Button Color
 		add_settings_field(
 			'button_color',
-			__( 'Button Color', 'ai-assistant' ),
+			__( 'Button Color', 'smart-assistant' ),
 			array( $this, 'render_button_color_field' ),
-			'ai-assistant-settings',
-			'ai_assistant_appearance'
+			'smart-assistant-settings',
+			'smart_assistant_appearance'
 		);
 	}
 
@@ -171,12 +171,12 @@ class Settings {
 					// If basic format check fails, still allow it but show a warning
 					// The API will validate it when used
 					if ( substr( $api_key_trimmed, 0, 3 ) !== 'sk-' || strlen( $api_key_trimmed ) < 20 ) {
-						add_settings_error(
-							$this->option_name,
-							'invalid_api_key',
-							__( 'Warning: API key format may be invalid. OpenAI API keys should start with "sk-" and be at least 20 characters long. The key will be validated when used.', 'ai-assistant' ),
-							'warning'
-						);
+					add_settings_error(
+						$this->option_name,
+						'invalid_api_key',
+						__( 'Warning: API key format may be invalid. OpenAI API keys should start with "sk-" and be at least 20 characters long. The key will be validated when used.', 'smart-assistant' ),
+						'warning'
+					);
 					}
 				}
 				// Always save the key (let OpenAI API validate it when used)
@@ -266,8 +266,8 @@ class Settings {
 			<form action="options.php" method="post">
 				<?php
 				settings_fields( $this->option_group );
-				do_settings_sections( 'ai-assistant-settings' );
-				submit_button( __( 'Save Settings', 'ai-assistant' ) );
+				do_settings_sections( 'smart-assistant-settings' );
+				submit_button( __( 'Save Settings', 'smart-assistant' ) );
 				?>
 			</form>
 		</div>
@@ -278,21 +278,21 @@ class Settings {
 	 * Render general section
 	 */
 	public function render_general_section() {
-		echo '<p>' . esc_html__( 'Configure general settings for the AI Assistant.', 'ai-assistant' ) . '</p>';
+		echo '<p>' . esc_html__( 'Configure general settings for the Smart Assistant.', 'smart-assistant' ) . '</p>';
 	}
 
 	/**
 	 * Render API section
 	 */
 	public function render_api_section() {
-		echo '<p>' . esc_html__( 'Configure OpenAI API settings.', 'ai-assistant' ) . '</p>';
+		echo '<p>' . esc_html__( 'Configure OpenAI API settings.', 'smart-assistant' ) . '</p>';
 	}
 
 	/**
 	 * Render appearance section
 	 */
 	public function render_appearance_section() {
-		echo '<p>' . esc_html__( 'Customize the appearance of the chat widget.', 'ai-assistant' ) . '</p>';
+		echo '<p>' . esc_html__( 'Customize the appearance of the chat widget.', 'smart-assistant' ) . '</p>';
 	}
 
 	/**
@@ -304,7 +304,7 @@ class Settings {
 		?>
 		<label>
 			<input type="checkbox" name="<?php echo esc_attr( $this->option_name ); ?>[enabled]" value="1" <?php checked( $enabled, true ); ?> />
-			<?php esc_html_e( 'Enable the AI Assistant on frontend pages', 'ai-assistant' ); ?>
+			<?php esc_html_e( 'Enable the Smart Assistant on frontend pages', 'smart-assistant' ); ?>
 		</label>
 		<?php
 	}
@@ -314,10 +314,10 @@ class Settings {
 	 */
 	public function render_welcome_message_field() {
 		$settings        = $this->get_settings();
-		$welcome_message = isset( $settings['welcome_message'] ) ? $settings['welcome_message'] : __( 'Hi! How can I help you find information?', 'ai-assistant' );
+		$welcome_message = isset( $settings['welcome_message'] ) ? $settings['welcome_message'] : __( 'Hi! How can I help you find information?', 'smart-assistant' );
 		?>
 		<textarea name="<?php echo esc_attr( $this->option_name ); ?>[welcome_message]" rows="3" cols="50" class="large-text"><?php echo esc_textarea( $welcome_message ); ?></textarea>
-		<p class="description"><?php esc_html_e( 'The initial message shown when users open the chat.', 'ai-assistant' ); ?></p>
+		<p class="description"><?php esc_html_e( 'The initial message shown when users open the chat.', 'smart-assistant' ); ?></p>
 		<?php
 	}
 
@@ -329,7 +329,7 @@ class Settings {
 		$api_key  = isset( $settings['api_key'] ) ? self::decrypt_api_key( $settings['api_key'] ) : '';
 		?>
 		<input type="password" name="<?php echo esc_attr( $this->option_name ); ?>[api_key]" value="<?php echo esc_attr( $api_key ); ?>" class="regular-text" />
-		<p class="description"><?php esc_html_e( 'Your OpenAI API key. Get one at https://platform.openai.com/api-keys', 'ai-assistant' ); ?></p>
+		<p class="description"><?php esc_html_e( 'Your OpenAI API key. Get one at https://platform.openai.com/api-keys', 'smart-assistant' ); ?></p>
 		<?php
 	}
 
@@ -344,7 +344,7 @@ class Settings {
 			<option value="gpt-3.5-turbo" <?php selected( $model, 'gpt-3.5-turbo' ); ?>>GPT-3.5 Turbo</option>
 			<option value="gpt-4" <?php selected( $model, 'gpt-4' ); ?>>GPT-4</option>
 		</select>
-		<p class="description"><?php esc_html_e( 'Choose the OpenAI model to use.', 'ai-assistant' ); ?></p>
+		<p class="description"><?php esc_html_e( 'Choose the OpenAI model to use.', 'smart-assistant' ); ?></p>
 		<?php
 	}
 
@@ -356,7 +356,7 @@ class Settings {
 		$max_context_posts = isset( $settings['max_context_posts'] ) ? $settings['max_context_posts'] : 50;
 		?>
 		<input type="number" name="<?php echo esc_attr( $this->option_name ); ?>[max_context_posts]" value="<?php echo esc_attr( $max_context_posts ); ?>" min="1" max="200" class="small-text" />
-		<p class="description"><?php esc_html_e( 'Maximum number of posts/pages to include in AI context (1-200).', 'ai-assistant' ); ?></p>
+		<p class="description"><?php esc_html_e( 'Maximum number of posts/pages to include in AI context (1-200).', 'smart-assistant' ); ?></p>
 		<?php
 	}
 
@@ -368,7 +368,7 @@ class Settings {
 		$button_color = isset( $settings['button_color'] ) ? $settings['button_color'] : '#0073aa';
 		?>
 		<input type="color" name="<?php echo esc_attr( $this->option_name ); ?>[button_color]" value="<?php echo esc_attr( $button_color ); ?>" />
-		<p class="description"><?php esc_html_e( 'Choose the color for the chat button.', 'ai-assistant' ); ?></p>
+		<p class="description"><?php esc_html_e( 'Choose the color for the chat button.', 'smart-assistant' ); ?></p>
 		<?php
 	}
 
@@ -378,22 +378,22 @@ class Settings {
 	 * @param string $hook Current admin page hook.
 	 */
 	public function enqueue_scripts( $hook ) {
-		if ( 'settings_page_ai-assistant-settings' !== $hook ) {
+		if ( 'settings_page_smart-assistant-settings' !== $hook ) {
 			return;
 		}
 
 		wp_enqueue_style(
-			'ai-assistant-admin',
-			AI_ASSISTANT_PLUGIN_URL . 'assets/css/admin.css',
+			'smart-assistant-admin',
+			SMART_ASSISTANT_PLUGIN_URL . 'assets/css/admin.css',
 			array(),
-			AI_ASSISTANT_VERSION
+			SMART_ASSISTANT_VERSION
 		);
 
 		wp_enqueue_script(
-			'ai-assistant-admin',
-			AI_ASSISTANT_PLUGIN_URL . 'assets/js/admin.js',
+			'smart-assistant-admin',
+			SMART_ASSISTANT_PLUGIN_URL . 'assets/js/admin.js',
 			array( 'jquery' ),
-			AI_ASSISTANT_VERSION,
+			SMART_ASSISTANT_VERSION,
 			true
 		);
 	}

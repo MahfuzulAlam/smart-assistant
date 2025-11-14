@@ -19,12 +19,12 @@ class ContentRetriever {
 	 */
 	public function get_content_for_context() {
 		// Check cache first
-		$cached = get_transient( 'ai_assistant_content_cache' );
+		$cached = get_transient( 'smart_assistant_content_cache' );
 		if ( false !== $cached ) {
 			return $cached;
 		}
 
-		$settings = get_option( 'ai_assistant_settings', array() );
+		$settings = get_option( 'smart_assistant_settings', array() );
 		$max_posts = isset( $settings['max_context_posts'] ) ? absint( $settings['max_context_posts'] ) : 50;
 
 		// Get posts and pages
@@ -53,7 +53,7 @@ class ContentRetriever {
 		}
 
 		// Cache for 1 hour
-		set_transient( 'ai_assistant_content_cache', $content, HOUR_IN_SECONDS );
+		set_transient( 'smart_assistant_content_cache', $content, HOUR_IN_SECONDS );
 
 		return $content;
 	}

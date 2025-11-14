@@ -1,30 +1,30 @@
 /**
- * Admin Styles for AI Assistant Settings Page
+ * Admin Styles for Smart Assistant Settings Page
  */
 
-.ai-assistant-settings-wrap {
+.smart-assistant-settings-wrap {
 	max-width: 800px;
 }
 
-.ai-assistant-settings-wrap .form-table th {
+.smart-assistant-settings-wrap .form-table th {
 	width: 200px;
 	padding: 20px 10px 20px 0;
 }
 
-.ai-assistant-settings-wrap .form-table td {
+.smart-assistant-settings-wrap .form-table td {
 	padding: 15px 10px;
 }
 
-.ai-assistant-settings-wrap input[type="text"],
-.ai-assistant-settings-wrap input[type="password"],
-.ai-assistant-settings-wrap input[type="number"],
-.ai-assistant-settings-wrap textarea,
-.ai-assistant-settings-wrap select {
+.smart-assistant-settings-wrap input[type="text"],
+.smart-assistant-settings-wrap input[type="password"],
+.smart-assistant-settings-wrap input[type="number"],
+.smart-assistant-settings-wrap textarea,
+.smart-assistant-settings-wrap select {
 	width: 100%;
 	max-width: 400px;
 }
 
-.ai-assistant-settings-wrap input[type="color"] {
+.smart-assistant-settings-wrap input[type="color"] {
 	width: 60px;
 	height: 40px;
 	border: 1px solid #ddd;
@@ -32,17 +32,17 @@
 	cursor: pointer;
 }
 
-.ai-assistant-settings-wrap .description {
+.smart-assistant-settings-wrap .description {
 	margin-top: 8px;
 	color: #666;
 	font-style: italic;
 }
 
-.ai-assistant-settings-wrap .notice {
+.smart-assistant-settings-wrap .notice {
 	margin: 20px 0;
 }
 
-.ai-assistant-settings-section {
+.smart-assistant-settings-section {
 	margin: 30px 0;
 	padding: 20px;
 	background: #fff;
@@ -50,7 +50,7 @@
 	border-radius: 4px;
 }
 
-.ai-assistant-settings-section h2 {
+.smart-assistant-settings-section h2 {
 	margin-top: 0;
 	padding-bottom: 10px;
 	border-bottom: 1px solid #eee;

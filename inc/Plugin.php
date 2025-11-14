@@ -57,7 +57,7 @@ class Plugin {
 	 */
 	public function init() {
 		// Load text domain
-		load_plugin_textdomain( 'ai-assistant', false, dirname( plugin_basename( AI_ASSISTANT_PLUGIN_FILE ) ) . '/languages' );
+		load_plugin_textdomain( 'smart-assistant', false, dirname( plugin_basename( SMART_ASSISTANT_PLUGIN_FILE ) ) . '/languages' );
 
 		// Initialize admin settings
 		if ( is_admin() ) {
@@ -85,14 +85,14 @@ class Plugin {
 			'api_key'           => '',
 			'model'             => 'gpt-3.5-turbo',
 			'max_context_posts' => 50,
-			'welcome_message'   => __( 'Hi! How can I help you find information?', 'ai-assistant' ),
+			'welcome_message'   => __( 'Hi! How can I help you find information?', 'smart-assistant' ),
 			'button_color'      => '#0073aa',
 			'enabled'           => true,
 		);
 
-		$options = get_option( 'ai_assistant_settings', array() );
+		$options = get_option( 'smart_assistant_settings', array() );
 		$options = wp_parse_args( $options, $defaults );
-		update_option( 'ai_assistant_settings', $options );
+		update_option( 'smart_assistant_settings', $options );
 
 		// Flush rewrite rules if needed
 		flush_rewrite_rules();
@@ -103,7 +103,7 @@ class Plugin {
 	 */
 	public function deactivate() {
 		// Clean up transients
-		delete_transient( 'ai_assistant_content_cache' );
+		delete_transient( 'smart_assistant_content_cache' );
 	}
 }
 
