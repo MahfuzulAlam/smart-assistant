@@ -21,7 +21,7 @@ class ContentRetriever {
 		// Check cache first
 		$cached = get_transient( 'smart_assistant_content_cache' );
 		if ( false !== $cached ) {
-			return $cached;
+			//return $cached;
 		}
 
 		$settings = get_option( 'smart_assistant_settings', array() );
@@ -30,7 +30,7 @@ class ContentRetriever {
 		// Get posts and pages
 		$posts = get_posts(
 			array(
-				'post_type'      => array( 'post', 'page' ),
+				'post_type'      => array( 'post' ),
 				'post_status'   => 'publish',
 				'numberposts'   => $max_posts,
 				'orderby'       => 'date',
@@ -42,12 +42,13 @@ class ContentRetriever {
 		$content = array();
 
 		foreach ( $posts as $post ) {
-			$excerpt = ! empty( $post->post_excerpt ) ? $post->post_excerpt : wp_trim_words( $post->post_content, 30 );
-			$content_text = wp_strip_all_tags( wp_trim_words( $post->post_content, 50 ) );
+			// Strip all HTML tags from content first
+			$clean_content = wp_strip_all_tags( $post->post_content );
+			// Trim to a reasonable length (200 words gives more context while managing token usage)
+			$content_text = wp_trim_words( $clean_content, 200 );
 
 			$content[] = array(
 				'title'   => sanitize_text_field( $post->post_title ),
-				'excerpt' => sanitize_text_field( $excerpt ),
 				'content' => sanitize_text_field( $content_text ),
 			);
 		}

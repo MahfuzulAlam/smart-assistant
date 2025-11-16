@@ -75,6 +75,8 @@ class ChatHandler {
 		// Build messages array for OpenAI
 		$messages = $this->build_messages( $user_message, $history, $content_context );
 
+		error_log( json_encode( $messages ) );
+
 		// Send to OpenAI
 		$response = $this->openai_client->send_chat_message( $messages );
 
@@ -108,18 +110,31 @@ class ChatHandler {
 		// Build system prompt
 		$content_text = '';
 		if ( ! empty( $content_context ) ) {
-			$content_text = "\n\nAvailable content:\n";
-			foreach ( $content_context as $item ) {
+			$content_text = "\n\n=== AVAILABLE CONTENT FROM THE WEBSITE ===\n\n";
+			foreach ( $content_context as $index => $item ) {
 				$content_text .= sprintf(
-					"\nTitle: %s\nExcerpt: %s\n",
+					"[Post %d]\nTitle: %s\nContent: %s\n\n",
+					$index + 1,
 					$item['title'],
-					$item['excerpt']
+					$item['content']
 				);
 			}
+			$content_text .= "=== END OF CONTENT ===\n";
 		}
 
 		$system_prompt = sprintf(
-			'You are a helpful assistant for %s (%s). You can only answer questions based on the following content from this website. If the user asks something not in the provided content, politely say you can only help with information from this website. Be concise, friendly, and helpful.%s',
+			'You are a helpful assistant for %s (%s). Your role is to answer questions ONLY using the content provided below from this website.
+
+CRITICAL INSTRUCTIONS - READ CAREFULLY:
+1. The content below is the SOURCE OF TRUTH - always prioritize it over any previous conversation history
+2. Search through ALL content below case-insensitively (ignore capitalization differences like "PaikarClud" vs "paikarclub")
+3. If the user asks about something that appears in ANY form (different capitalization, partial match, similar spelling, or variations) in the content below, you MUST provide an answer based on that content
+4. Look for keywords, phrases, and related terms - be flexible and intelligent with matching
+5. If you previously said information was not available but it actually exists in the content below, CORRECT YOURSELF and provide the correct answer
+6. Only say information is not available if you have thoroughly searched ALL posts and the information is genuinely not present
+7. When you find the information, cite the post title it came from
+
+Be concise, friendly, and helpful.%s',
 			$site_name,
 			$site_url,
 			$content_text
