@@ -1,0 +1,40 @@
+/* Smart Assistant Triggers Admin Styles */
+.smart-assistant-triggers-header {
+	margin: 20px 0;
+}
+
+.smart-assistant-triggers-logs {
+	margin-top: 40px;
+}
+
+.column-name {
+	width: 20%;
+}
+
+.column-description {
+	width: 30%;
+}
+
+.column-command {
+	width: 25%;
+}
+
+.column-status {
+	width: 10%;
+}
+
+.column-actions {
+	width: 15%;
+}
+
+.row-actions {
+	font-size: 11px;
+	color: #787c82;
+	margin-top: 4px;
+}
+
+.trigger-settings,
+.trigger-test {
+	margin-right: 5px;
+}
+

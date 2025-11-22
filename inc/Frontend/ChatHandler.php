@@ -2,13 +2,14 @@
 /**
  * Chat Handler for AJAX Requests
  *
- * @package AIAssistant
+ * @package SmartAssistant
  */
 
-namespace AIAssistant\Frontend;
+namespace SmartAssistant\Frontend;
 
-use AIAssistant\API\OpenAIClient;
-use AIAssistant\Data\ContentRetriever;
+use SmartAssistant\API\OpenAIClient;
+use SmartAssistant\Data\ContentRetriever;
+use SmartAssistant\Triggers\TriggerRegistry;
 
 /**
  * Chat handler class for processing AJAX requests
@@ -86,11 +87,33 @@ class ChatHandler {
 			wp_send_json_error( array( 'message' => $response->get_error_message() ) );
 		}
 
-		// Return success response
+		// Initialize trigger registry
+		$trigger_registry = TriggerRegistry::get_instance();
+
+		// Build execution context
+		$context = array(
+			'user_id'            => get_current_user_id(),
+			'user_message'       => $user_message,
+			'conversation_history' => $history,
+			'timestamp'          => current_time( 'mysql' ),
+			'session_id'         => $this->get_session_id(),
+			'ip_address'         => isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '',
+			'user_agent'         => isset( $_SERVER['HTTP_USER_AGENT'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) : '',
+		);
+
+		// Parse and execute triggers from AI response
+		$trigger_results = $trigger_registry->parse_and_execute( $response, $context );
+
+		// Strip trigger commands from display message
+		$clean_message = $trigger_registry->strip_commands( $response );
+
+		// Return success response with trigger results
 		wp_send_json_success(
 			array(
-				'response'   => $response,
-				'timestamp'  => current_time( 'mysql' ),
+				'message'          => $clean_message,
+				'original_message' => $response,
+				'triggers_executed' => $trigger_results,
+				'timestamp'        => current_time( 'mysql' ),
 			)
 		);
 	}

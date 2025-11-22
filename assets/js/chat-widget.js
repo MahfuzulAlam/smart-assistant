@@ -116,12 +116,27 @@
 				success: (response) => {
 					this.hideLoading();
 
-					if (response.success && response.data.response) {
-						this.addMessage('ai', response.data.response);
+					if (response.success && response.data.message) {
+						// Add AI message
+						this.addMessage('ai', response.data.message);
 						this.history.push({
 							role: 'assistant',
-							content: response.data.response
+							content: response.data.message
 						});
+
+						// Handle trigger execution results
+						if (response.data.triggers_executed && response.data.triggers_executed.length > 0) {
+							response.data.triggers_executed.forEach((trigger) => {
+								if (trigger.success) {
+									// Show success message for trigger
+									this.addMessage('ai', '✓ ' + trigger.message, false);
+								} else {
+									// Show error message for trigger
+									this.addMessage('ai', '✗ ' + trigger.message, true);
+								}
+							});
+						}
+
 						this.saveHistory();
 					} else {
 						const errorMsg = response.data && response.data.message 

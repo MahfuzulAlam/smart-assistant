@@ -2,10 +2,10 @@
 /**
  * Frontend Chat Widget
  *
- * @package AIAssistant
+ * @package SmartAssistant
  */
 
-namespace AIAssistant\Frontend;
+namespace SmartAssistant\Frontend;
 
 /**
  * Chat widget class for frontend display

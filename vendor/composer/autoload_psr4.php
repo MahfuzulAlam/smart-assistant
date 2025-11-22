@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'AIAssistant\\' => array($baseDir . '/inc'),
+    'SmartAssistant\\' => array($baseDir . '/inc'),
 );

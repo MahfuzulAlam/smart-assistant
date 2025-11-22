@@ -2,10 +2,10 @@
 /**
  * Content Retriever for WordPress Posts and Pages
  *
- * @package AIAssistant
+ * @package SmartAssistant
  */
 
-namespace AIAssistant\Data;
+namespace SmartAssistant\Data;
 
 /**
  * Content retriever class

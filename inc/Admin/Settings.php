@@ -2,10 +2,10 @@
 /**
  * Admin Settings Page
  *
- * @package AIAssistant
+ * @package SmartAssistant
  */
 
-namespace AIAssistant\Admin;
+namespace SmartAssistant\Admin;
 
 /**
  * Admin settings page class

@@ -2,12 +2,12 @@
 /**
  * OpenAI API Client
  *
- * @package AIAssistant
+ * @package SmartAssistant
  */
 
-namespace AIAssistant\API;
+namespace SmartAssistant\API;
 
-use AIAssistant\Admin\Settings;
+use SmartAssistant\Admin\Settings;
 
 /**
  * OpenAI API client class

@@ -2,10 +2,10 @@
 /**
  * Main Plugin Class
  *
- * @package AIAssistant
+ * @package SmartAssistant
  */
 
-namespace AIAssistant;
+namespace SmartAssistant;
 
 /**
  * Main plugin class that initializes all components
@@ -74,6 +74,26 @@ class Plugin {
 		// Initialize AJAX handler (works in both admin and frontend)
 		$this->chat_handler = new Frontend\ChatHandler();
 		$this->chat_handler->init();
+
+		// Initialize trigger system
+		$this->init_triggers();
+	}
+
+	/**
+	 * Initialize trigger system
+	 *
+	 * @return void
+	 * @since 1.0.0
+	 */
+	private function init_triggers(): void {
+		// Load trigger registry (this will auto-register built-in triggers)
+		Triggers\TriggerRegistry::get_instance();
+
+		// Initialize admin interface for triggers
+		if ( is_admin() ) {
+			$trigger_manager = new Triggers\Admin\TriggerManager();
+			$trigger_manager->init();
+		}
 	}
 
 	/**

@@ -31,7 +31,7 @@ if ( file_exists( SMART_ASSISTANT_PLUGIN_DIR . 'vendor/autoload.php' ) ) {
 } else {
 	// Fallback autoloader if Composer hasn't been run
 	spl_autoload_register( function ( $class ) {
-		$prefix = 'AIAssistant\\';
+		$prefix = 'SmartAssistant\\';
 		$base_dir = SMART_ASSISTANT_PLUGIN_DIR . 'inc/';
 		
 		$len = strlen( $prefix );
@@ -50,7 +50,7 @@ if ( file_exists( SMART_ASSISTANT_PLUGIN_DIR . 'vendor/autoload.php' ) ) {
 
 // Initialize the plugin
 function smart_assistant_init() {
-	$plugin = new AIAssistant\Plugin();
+	$plugin = new SmartAssistant\Plugin();
 	$plugin->init();
 }
 
@@ -59,16 +59,16 @@ add_action( 'plugins_loaded', 'smart_assistant_init' );
 
 // Activation hook
 register_activation_hook( __FILE__, function () {
-	if ( class_exists( 'AIAssistant\\Plugin' ) ) {
-		$plugin = new AIAssistant\Plugin();
+	if ( class_exists( 'SmartAssistant\\Plugin' ) ) {
+		$plugin = new SmartAssistant\Plugin();
 		$plugin->activate();
 	}
 } );
 
 // Deactivation hook
 register_deactivation_hook( __FILE__, function () {
-	if ( class_exists( 'AIAssistant\\Plugin' ) ) {
-		$plugin = new AIAssistant\Plugin();
+	if ( class_exists( 'SmartAssistant\\Plugin' ) ) {
+		$plugin = new SmartAssistant\Plugin();
 		$plugin->deactivate();
 	}
 } );
